@@ -20,7 +20,7 @@ void loop()
 {
 czas=millis();
 
-if(czas-czas_odbieranie_syngalu-czas>20)
+if(czas-czas_odbieranie_syngalu>20)
 {
     odbieranie_sygnalu();
     czas_odbieranie_syngalu=czas;
@@ -32,7 +32,7 @@ if(czas-czas_wywolywanie_alarmu_1>100)
     czas_wywolywanie_alarmu_1=czas;
 }
 
-if(x>=5)//powinno robić to samo co wywolywanie alarmu #2
+if(x>=5)//powinno robić to samo co funkcja loop2
 {
     digitalWrite(8, HIGH);
 }
