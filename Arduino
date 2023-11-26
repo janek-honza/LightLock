@@ -1,0 +1,45 @@
+int x = 0;
+int y = 0;
+
+void setup()
+{
+  pinMode(7, OUTPUT); //nadajnik
+  pinMode(4, INPUT); //odbiornik
+  pinMode(10, OUTPUT); //konrolka połączenia
+  pinMode(8, OUTPUT); //kontrolka alarm
+  pinMode(9, INPUT); //odbiornik alarm nie wiadomo jak podłączyć
+}
+ 
+void loop()//odbieranie sygnału
+{
+    if (digitalRead(4) == HIGH) {
+      digitalWrite(10, HIGH);
+    } else {
+      digitalWrite(10, LOW);
+    }
+    delay(20);
+}
+
+void loop1()//wywoływanie alarmu#1
+{
+  if (digitalRead(9) == LOW) {
+      x = x + 1;
+      delay (100);
+      } else {
+      x = 0;
+    }
+}
+
+void loop2()//wywoływanie alarmu#2
+{
+    if (x >= 5) {
+    digitalWrite(8, HIGH);
+    }
+}
+void loop3()//nadawanie sygnału
+{
+    digitalWrite(7, LOW);
+    delay (10);
+    digitalWrite(7, HIGH);
+    delay(100);
+}
