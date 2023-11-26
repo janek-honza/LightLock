@@ -1,5 +1,11 @@
 int x = 0;
 int y = 0;
+int czas=0;
+int czas1=0;
+int czas2=0;
+int czas3=0;
+
+
 
 void setup()
 {
@@ -10,33 +16,52 @@ void setup()
   pinMode(9, INPUT); //odbiornik alarm nie wiadomo jak podłączyć
 }
  
-void loop()//odbieranie sygnału
+void loop()
+{
+czas=millis();
+
+if(czas1-czas>20)
+{
+funkcja1();
+czas1=czas;
+}
+
+if(czas2-czas>100)
+{
+funkcja2();
+czas2=czas;
+}
+
+if(x>=5)
+{
+funkcja3();
+}
+
+}
+
+void funkcja1()//odbieranie sygnału
 {
     if (digitalRead(4) == HIGH) {
       digitalWrite(10, HIGH);
     } else {
       digitalWrite(10, LOW);
     }
-    delay(20);
 }
 
-void loop1()//wywoływanie alarmu#1
+void funkcja2()//wywoływanie alarmu#1
 {
   if (digitalRead(9) == LOW) {
       x = x + 1;
-      delay (100);
       } else {
       x = 0;
     }
 }
 
-void loop2()//wywoływanie alarmu#2
+void funkcja3()//wywoływanie alarmu#2
 {
-    if (x >= 5) {
     digitalWrite(8, HIGH);
-    }
 }
-void loop3()//nadawanie sygnału
+void funkcja4()//nadawanie sygnału
 {
     digitalWrite(7, LOW);
     delay (10);
