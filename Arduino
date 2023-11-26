@@ -28,9 +28,6 @@ if(czas-czas_odbieranie_syngalu>20)
 
 if(czas-czas_wywolywanie_alarmu_1>100)
 {
-    x = x + 1;
-    }else{
-    x = 0;
     wywolywanie_alarmu_1();
     czas_wywolywanie_alarmu_1=czas;
 }
