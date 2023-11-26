@@ -1,9 +1,9 @@
 int x = 0;
 int y = 0;
 int czas=0;
-int czas1=0;
-int czas2=0;
-int czas3=0;
+int czas_odbieranie_syngalu=0;
+int czas_wywolywanie_alarmu_1=0;
+int czas_nadawanie_syngalu=0;
 
 
 
@@ -20,26 +20,37 @@ void loop()
 {
 czas=millis();
 
-if(czas1-czas>20)
+if(czas-czas_odbieranie_syngalu-czas>20)
 {
-funkcja1();
-czas1=czas;
+    odbieranie_sygnalu();
+    czas_odbieranie_syngalu=czas;
 }
 
-if(czas2-czas>100)
+if(czas-czas_wywolywanie_alarmu_1>100)
 {
-funkcja2();
-czas2=czas;
+    wywolywanie_alarmu_1();
+    czas_wywolywanie_alarmu_1=czas;
 }
 
-if(x>=5)
+if(x>=5)//powinno robić to samo co wywolywanie alarmu #2
 {
-funkcja3();
+    digitalWrite(8, HIGH);
 }
 
+if(czas-czas_nadawanie_syngalu>110)//powinno robić to samo co funkcja loop3
+{
+    digitalWrite(7,HIGH);
+    czas_nadawania_syngalu=czas;
 }
 
-void funkcja1()//odbieranie sygnału
+if(czas-czas_nadawanie_syngalu>10)
+{
+    digitalWrite(7,LOW);
+}
+    
+}
+
+void odbieranie_sygnalu()//odbieranie sygnału
 {
     if (digitalRead(4) == HIGH) {
       digitalWrite(10, HIGH);
@@ -48,23 +59,11 @@ void funkcja1()//odbieranie sygnału
     }
 }
 
-void funkcja2()//wywoływanie alarmu#1
+void wywolywanie_alarmu_1()//wywoływanie alarmu#1
 {
   if (digitalRead(9) == LOW) {
       x = x + 1;
       } else {
       x = 0;
     }
-}
-
-void funkcja3()//wywoływanie alarmu#2
-{
-    digitalWrite(8, HIGH);
-}
-void funkcja4()//nadawanie sygnału
-{
-    digitalWrite(7, LOW);
-    delay (10);
-    digitalWrite(7, HIGH);
-    delay(100);
 }
