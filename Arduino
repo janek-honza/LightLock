@@ -61,7 +61,7 @@ void odbieranie_sygnalu()//odbieranie sygnału
 
 void wywolywanie_alarmu_1()//wywoływanie alarmu#1
 {
-  if (digitalRead(9) == LOW) {
+  if (digitalRead(4) == LOW) {
       x = x + 1;
       } else {
       x = 0;
