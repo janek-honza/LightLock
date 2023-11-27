@@ -1,0 +1,71 @@
+int x = 0;
+int y = 0;
+int czas=0;
+int czas_odbieranie_syngalu=0;
+int czas_wywolywanie_alarmu_1=0;
+int czas_nadawanie_syngalu=0;
+
+
+
+void setup()
+{
+  pinMode(7, OUTPUT); //nadajnik
+  pinMode(4, INPUT); //odbiornik
+  pinMode(10, OUTPUT); //konrolka połączenia
+  pinMode(8, OUTPUT); //kontrolka alarm
+  pinMode(9, INPUT); //odbiornik alarm nie wiadomo jak podłączyć
+}
+ 
+void loop()
+{
+czas=millis();
+
+if(czas-czas_odbieranie_syngalu>20)
+{
+    odbieranie_sygnalu();
+    czas_odbieranie_syngalu=czas;
+}
+
+if(czas-czas_wywolywanie_alarmu_1>100)
+{
+    wywolywanie_alarmu_1();
+    czas_wywolywanie_alarmu_1=czas;
+}
+
+if(x>=1)//powinno robić to samo co funkcja loop2
+    {
+    digitalWrite(8, HIGH);
+    } else {
+    digitalWrite(8, LOW);
+    }
+
+if(czas-czas_nadawanie_syngalu>100)//powinno robić to samo co funkcja loop3
+{
+    digitalWrite(7,LOW);
+    czas_nadawanie_syngalu=czas;
+}
+
+if(czas-czas_nadawanie_syngalu>50)
+{
+    digitalWrite(7,HIGH);
+}
+    
+}
+
+void odbieranie_sygnalu()//odbieranie sygnału
+{
+    if (digitalRead(4) == HIGH) {
+      digitalWrite(10, HIGH);
+    } else {
+      digitalWrite(10, LOW);
+    }
+}
+
+void wywolywanie_alarmu_1()//wywoływanie alarmu#1
+{
+  if (digitalRead(4) == LOW) {
+      x = x + 1;
+      } else {
+      x = 0;
+    }
+}
