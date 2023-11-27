@@ -35,15 +35,17 @@ if(czas-czas_wywolywanie_alarmu_1>100)
 if(x>=5)//powinno robić to samo co funkcja loop2
 {
     digitalWrite(8, HIGH);
+    } else {
+    digitalWrite(8, LOW);
 }
 
-if(czas-czas_nadawanie_syngalu>110)//powinno robić to samo co funkcja loop3
+if(czas-czas_nadawanie_syngalu>100)//powinno robić to samo co funkcja loop3
 {
-    digitalWrite(7,HIGH);
-    czas_nadawania_syngalu=czas;
+    digitalWrite(7,LOW);
+    czas_nadawanie_syngalu=czas;
 }
 
-if(czas-czas_nadawanie_syngalu>10)
+if(czas-czas_nadawanie_syngalu>50)
 {
     digitalWrite(7,LOW);
 }
@@ -61,7 +63,7 @@ void odbieranie_sygnalu()//odbieranie sygnału
 
 void wywolywanie_alarmu_1()//wywoływanie alarmu#1
 {
-  if (digitalRead(9) == LOW) {
+  if (digitalRead(4) == LOW) {
       x = x + 1;
       } else {
       x = 0;
